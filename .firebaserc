@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "rrchat-22bbc"
+  },
+  "hosting": {
+    "public": "dist"
+  }
+
+}

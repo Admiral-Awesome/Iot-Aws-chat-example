@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 chat" *ngFor="let chat of iot.chats; let i = index;">
+      <div class="messages">
+        <div>
+          <strong>Chat namespace : {{chat.topic}}</strong>
+        </div>
+        <div class="message-list">
+          <ul>
+            <li *ngFor="let message of chat.messages" [ngClass]="{'my-message': message.type === 0 && message.nickname === chat.nickname}">
+              <!-- div system message -->
+              <div class="system-message" *ngIf="message.type === 1" class="alert alert-warning" role="alert">
+                <div>
+                  <strong>{{message.text}}</strong>
+                </div>
+              </div>
+              <!-- my message -->
+              <div class="my-message" *ngIf="message.type === 0 && message.nickname === chat.nickname" class="alert alert-info" role="alert">
+                <div>
+                  {{message.text}}
+                </div>
+              </div>
+              <div class="someone-message" *ngIf="message.type === 0 && message.nickname !== chat.nickname" class="alert alert-info" role="alert">
+                <div>
+                  <strong>From : {{message.nickname}}, Arrived {{message.date | date : 'h:mm:ss a'}}, On road {{ message.onRoad/1000}} sec</strong>
+                </div>
+                <div>
+                  {{message.text}}
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="typing" *ngIf="chat.writers.length > 0">{{iot.getWriters(chat.writers)}} typing... </div>
+        </div>
+        <div class="input-group">
+          <input  (ngModelChange)="iot.startType(event, i)" class="form-control input" rows="3" style="resize:none" [(ngModel)]="chat.currentMessage" (keyup.enter)="iot.generateAndSendMessage(i)">
+          <span class="input-group-addon btn btn-primary" (click)="iot.generateAndSendMessage(i)" >Send</span>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-4">
+        <app-login></app-login>
+    </div>
+  </div>
+</div>

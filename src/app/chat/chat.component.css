@@ -1,0 +1,32 @@
+.chat {
+    min-height: 500px;
+    border: 1px dashed blue;
+    border-radius: 10px;
+    /* margin-left: 10px !important; */
+}
+
+ul { 
+    height:380px;
+     width:100%;
+    overflow:hidden; 
+    overflow-y:scroll;
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+li {
+    width: 80%;
+}
+
+li.my-message {
+    padding-left: 30%;
+    width: 100%;
+}
+
+.message-list {
+    max-height: 500px;
+}
+
+textarea {
+    margin-right: 0px !important;
+}
